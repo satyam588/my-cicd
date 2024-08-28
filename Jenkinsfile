@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'NodeJS-20' // Ensure NodeJS is set up in Jenkins Global Tool Configuration
+        NODEJS_HOME = tool name: 'Node14' // Ensure NodeJS is set up in Jenkins Global Tool Configuration
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
     }
 
@@ -19,17 +19,17 @@ pipeline {
             }
         }
         
+        // stage('Fix') {
+        //     steps {
+        //         sh 'npm audit fix --force'
+        //     }
+        // }
+        
         stage('Build') {
             steps {
                 sh 'npm run build'
             }
         }
-        
-        // stage('Test') {
-        //     steps {
-        //         sh 'npm test'
-        //     }
-        // }
         
         stage('Deploy') {
             steps {
